@@ -1,15 +1,7 @@
+
 import express, { type Express, type Request, type Response } from 'express';
 import { morganLogger } from './loaders/logger';
-
-
-
-const PORT: number = process.env.PORT ? parseInt(process.env.PORT) : 3000;
-const HOST: string = process.env.HOST || 'localhost';
-
-
-const protocol: string = process.env.NODE_ENV === 'production' ? 'https' : 'http';
-const URL: string = `${protocol}://${HOST}:${PORT}`;
-
+import { config } from './config';
 
 
 async function startServer() {
@@ -18,10 +10,10 @@ async function startServer() {
   app.use(morganLogger)
 
 
-  app.listen(PORT, () => {
+  app.listen(config.port, () => {
     console.log(`
       ################################################
-            Server running on: ${URL}
+            Server running on: ${config.url}
       ################################################`);
   }).on('error', (err: Error) => {
     console.error('Error starting server:', err);
