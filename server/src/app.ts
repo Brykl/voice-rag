@@ -4,6 +4,7 @@ import type { IAuthAdapter } from './interfaces/IAuthAdapter.js';
 import { createAuthMiddleware } from './api/middlewares/authMiddleware.ts';
 import { morganLogger } from './loaders/logger.js';
 import { config } from './config/index.js';
+import { registerRoutesV1 } from './api/routes/route.ts';
 
 
 async function startServer() {
@@ -29,6 +30,9 @@ async function startServer() {
 
   const authMiddleware = createAuthMiddleware(authAdapter);
 
+  const apiRouter = express.Router();
+  registerRoutesV1(apiRouter, authMiddleware);
+  app.use('/api', apiRouter);
 
   app.listen(config.port, () => {
     console.log(`
