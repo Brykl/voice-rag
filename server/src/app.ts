@@ -1,7 +1,7 @@
 
 import express, { type Express, type Request, type Response } from 'express';
 import type { IAuthAdapter } from './interfaces/IAuthAdapter.js';
-import { createAuthMiddleware } from './middlewares/authMiddleware.js';
+import { createAuthMiddleware } from './api/middlewares/authMiddleware.ts';
 import { morganLogger } from './loaders/logger.js';
 import { config } from './config/index.js';
 
@@ -15,7 +15,7 @@ async function startServer() {
       const { FirebaseAuthAdapter } = await import('./adapters/FirebaseAuthAdapter.js');
       authAdapter = new FirebaseAuthAdapter();
       break;
-      
+
     default:
       console.error(`Unsupported auth adapter: ${config.authAdapter}`);
       process.exit(1);

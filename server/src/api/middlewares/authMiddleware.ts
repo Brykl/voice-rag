@@ -1,6 +1,6 @@
 // middlewares/authMiddleware.ts
 import type { Request, Response, NextFunction } from 'express';
-import type { IAuthAdapter } from '../interfaces/IAuthAdapter.js';
+import type { IAuthAdapter } from '../../interfaces/IAuthAdapter.ts';
 
 export const createAuthMiddleware = (auth: IAuthAdapter) => {
   return async (req: Request, res: Response, next: NextFunction) => {
