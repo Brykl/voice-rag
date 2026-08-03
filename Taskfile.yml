@@ -18,3 +18,13 @@ tasks:
     cmds:
       - cd server && npm run dev
     silent: true
+  # docker:
+  #   desc: run docker compose 
+  #   cmds:
+  #     - docker compose -f docker-compose.yaml up -d
+  #   silent: true
+  docker:db:run:
+    desc: Run the docker compose for database
+    cmds:
+      - docker compose -f ./docker/postgres-docker-compose.yaml up -d --build
+    silent: true
