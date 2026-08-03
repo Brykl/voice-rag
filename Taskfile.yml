@@ -26,5 +26,10 @@ tasks:
   docker:db:run:
     desc: Run the docker compose for database
     cmds:
-      - docker compose -f ./docker/postgres-docker-compose.yaml up -d --build
+      - docker compose -f ./docker/postgres-docker-compose.yaml up --build -d
+    silent: true
+  docker:db:delete:
+    desc: Delete the docker compose for database
+    cmds:
+      - docker compose -f ./docker/postgres-docker-compose.yaml down -v
     silent: true
