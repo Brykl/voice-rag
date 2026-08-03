@@ -1,0 +1,34 @@
+name: voice-rag
+services:
+  postgres:
+    image: postgres:18
+    container_name: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/data:/var/lib/postgresql
+  
+  # pgbouncer:
+  #   image: edoburu/pgbouncer
+  #   container_name: pgbouncer
+  #   restart: always
+  #   depends_on:
+  #     - postgres
+  #   ports:
+  #     - "6432:6432"
+  #   environment:
+  #     DB_USER: "myuser"
+  #     DB_PASSWORD: "mypass"
+  #   volumes:
+  #     - pgbouncer_data:/var/lib/pgbouncer
+  #     - ./docker/pgbouncer/pgbouncer.ini:/etc/pgbouncer/pgbouncer.ini
+  #     - ./docker/pgbouncer/userlist.txt:/etc/pgbouncer/userlist.txt
+
+volumes:
+  postgres_data:
+  # pgbouncer_data:
