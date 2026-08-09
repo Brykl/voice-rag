@@ -14,3 +14,6 @@ CREATE TABLE workspace (
     user_id integer NOT NULL REFERENCES users (id) ON DELETE CASCADE, -- foreign key referencing users table, cannot be null, if the referenced user is deleted, the workspace will also be deleted
     UNIQUE (name, user_id) -- unique constraint on name and user_id combination
 );
+
+INSERT INTO users (username, email, firebase_uid, is_admin) VALUES
+('admin', 'iusupovegor@gmail.com', '3kTzExMhM6SC2IDZKB2yea8r2JV2', true);
