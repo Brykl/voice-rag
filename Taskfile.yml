@@ -13,6 +13,12 @@ tasks:
     cmds:
       - echo "{{.GREETING}}"
     silent: true
+  run:
+    desc: Run the voice RAG app
+    cmds:
+    - task: docker:db:run
+    - task: db:pull
+    - task: server
   server:
     desc: Run the web server
     cmds:
@@ -32,4 +38,10 @@ tasks:
     desc: Delete the docker compose for database
     cmds:
       - docker compose -f ./docker/postgres-docker-compose.yaml down -v
+    silent: true
+  db:pull:
+    desc: Pull DB schema and generate Prisma models
+    cmds:
+      - cd server && npx prisma db pull
+      - cd server && npx prisma generate
     silent: true
